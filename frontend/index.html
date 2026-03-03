@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoológico</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Registrar Animal</h1>
+
+    <form id="animalForm">
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="number" id="edad" placeholder="Edad" required min="1">
+
+        <select id="tipo" required>
+            <option value="LEON">León</option>
+            <option value="ELEFANTE">Elefante</option>
+            <option value="MONO">Mono</option>
+        </select>
+
+        <select id="habitat" required>
+            <option value="SABANA">Sabana</option>
+            <option value="SELVA">Selva</option>
+            <option value="ACUARIO">Acuario</option>
+        </select>
+
+        <button type="submit">Registrar</button>
+    </form>
+
+    <div class="acciones">
+        <button type="button" id="btnListar">Listar Animales</button>
+        <button type="button" id="btnOrdenar">Ordenar por edad</button>
+        <button type="button" id="btnLimpiar">Limpiar Lista</button>
+    </div>
+
+    <ul id="lista"></ul>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
