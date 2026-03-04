@@ -1,9 +1,13 @@
 /home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/ZooApplication.java
 /home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/bridge/Acuario.java
+/home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/bridge/Desierto.java
 /home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/bridge/Habitat.java
+/home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/bridge/Montana.java
+/home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/bridge/Rio.java
 /home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/bridge/Sabana.java
 /home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/bridge/Selva.java
 /home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/chain/Validador.java
+/home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/chain/ValidarCompatibilidad.java
 /home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/chain/ValidarEdad.java
 /home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/chain/ValidarHabitat.java
 /home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/chain/ValidarNombre.java
@@ -12,8 +16,11 @@
 /home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/dto/AnimalDTO.java
 /home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/factory/AnimalFactory.java
 /home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/factory/AnimalFactoryImpl.java
+/home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/model/Aguila.java
 /home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/model/Animal.java
+/home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/model/Cocodrilo.java
 /home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/model/Elefante.java
 /home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/model/Leon.java
 /home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/model/Mono.java
+/home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/model/Tiburon.java
 /home/chelo/Escritorio/UVG/5to Semestre/Ingeniería de Software I/patrones-arquitectonicos-y-de-diseno/src/main/java/com/zoo/service/AnimalService.java

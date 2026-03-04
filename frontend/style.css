@@ -401,6 +401,100 @@ body {
 .empty-state span { font-size: 3rem; }
 .empty-state p { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 
+/* ─── Badge variants ─────────────────────────────────────────── */
+.badge--teal {
+  background: rgba(78, 201, 176, 0.12);
+  color: var(--accent2);
+  border-color: rgba(78, 201, 176, 0.3);
+}
+
+.badge--purple {
+  background: rgba(188, 140, 255, 0.12);
+  color: #bc8cff;
+  border-color: rgba(188, 140, 255, 0.3);
+}
+
+/* ─── Tooltip trigger ────────────────────────────────────────── */
+.tooltip-trigger {
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.15s;
+}
+.tooltip-trigger:hover { opacity: 0.75; }
+
+/* ─── Floating Tooltip ───────────────────────────────────────── */
+.tooltip {
+  position: fixed;
+  z-index: 1000;
+  background: #1c2128;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  padding: 16px 18px;
+  width: 300px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+  animation: tooltipIn 0.15s ease;
+}
+
+.tooltip.visible {
+  display: flex;
+}
+
+@keyframes tooltipIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.tooltip strong {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--accent);
+}
+
+.tooltip p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.code-block {
+  display: block;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 11px;
+  color: var(--accent2);
+  line-height: 1.7;
+  white-space: pre;
+}
+
+/* ─── Field hints ────────────────────────────────────────────── */
+.field-hint {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+/* ─── Compatibility hint ─────────────────────────────────────── */
+.compat-hint {
+  font-size: 11px;
+  min-height: 14px;
+  transition: color 0.2s;
+}
+.compat-hint.ok  { color: var(--success); }
+.compat-hint.err { color: var(--danger); }
+
+/* ─── 5th chain step highlight ───────────────────────────────── */
+.chain__step--highlight {
+  border-color: #bc8cff44;
+  background: rgba(188, 140, 255, 0.05);
+}
+.chain__step--highlight .chain__name { color: #bc8cff; }
+
 /* ─── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 800px) {
   .layout { grid-template-columns: 1fr; }

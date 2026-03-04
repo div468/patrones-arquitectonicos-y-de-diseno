@@ -1,10 +1,6 @@
 package com.zoo.service;
 
-import com.zoo.chain.Validador;
-import com.zoo.chain.ValidarEdad;
-import com.zoo.chain.ValidarHabitat;
-import com.zoo.chain.ValidarNombre;
-import com.zoo.chain.ValidarTipo;
+import com.zoo.chain.*;
 import com.zoo.dto.AnimalDTO;
 import com.zoo.factory.AnimalFactory;
 import com.zoo.model.Animal;
@@ -37,28 +33,33 @@ public class AnimalService {
     public List<Animal> ordenarPor(String criterio) {
         List<Animal> copia = new ArrayList<>(animales);
 
-        if ("edad".equalsIgnoreCase(criterio)) {
-            copia.sort(Comparator.comparingInt(Animal::getEdad));
-            return copia;
-        }
-
-        if ("nombre".equalsIgnoreCase(criterio)) {
-            copia.sort(Comparator.comparing(Animal::getNombre, String.CASE_INSENSITIVE_ORDER));
-            return copia;
-        }
-
-        throw new IllegalArgumentException("Criterio inválido. Usa 'edad' o 'nombre'.");
+        return switch (criterio.toLowerCase()) {
+            case "edad"   -> { copia.sort(Comparator.comparingInt(Animal::getEdad)); yield copia; }
+            case "nombre" -> { copia.sort(Comparator.comparing(Animal::getNombre, String.CASE_INSENSITIVE_ORDER)); yield copia; }
+            default -> throw new IllegalArgumentException("Criterio inválido. Usa 'edad' o 'nombre'.");
+        };
     }
 
+    /**
+     * Construye la cadena de responsabilidad con 5 eslabones:
+     *
+     *   ValidarNombre → ValidarEdad → ValidarTipo → ValidarHabitat → ValidarCompatibilidad
+     *
+     * El orden importa: primero validamos que los campos existan y sean
+     * reconocidos, y solo al final validamos la regla de negocio (compatibilidad),
+     * porque esa validación asume que tipo y hábitat ya son valores válidos.
+     */
     private Validador construirCadena() {
-        Validador nombre = new ValidarNombre();
-        Validador edad = new ValidarEdad();
-        Validador tipo = new ValidarTipo();
-        Validador habitat = new ValidarHabitat();
+        Validador nombre         = new ValidarNombre();
+        Validador edad           = new ValidarEdad();
+        Validador tipo           = new ValidarTipo();
+        Validador habitat        = new ValidarHabitat();
+        Validador compatibilidad = new ValidarCompatibilidad();
 
         nombre.setSiguiente(edad);
         edad.setSiguiente(tipo);
         tipo.setSiguiente(habitat);
+        habitat.setSiguiente(compatibilidad);   // ← eslabón de lógica de negocio
 
         return nombre;
     }
