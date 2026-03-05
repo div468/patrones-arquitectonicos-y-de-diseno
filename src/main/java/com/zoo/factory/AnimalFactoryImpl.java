@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * solo llaman a crearAnimal(dto).
  *
  * Bridge en acción: el animal recibe una implementación de Habitat,
- * no un String. Así Leon + Sabana y Leon + Desierto son combinaciones
+ * no un String. Así Leon con Sabana y Leon con Desierto son combinaciones
  * libres sin necesidad de subclases LeonSabana / LeonDesierto.
  */
 @Component

@@ -34,8 +34,7 @@ public class ValidarCompatibilidad extends Validador {
 
         Set<String> habitatsValidos = COMPATIBILIDAD.get(tipo);
 
-        if (habitatsValidos == null) return; // ValidarTipo ya lo rechazó antes
-
+        if (habitatsValidos == null) return; 
         if (!habitatsValidos.contains(habitat)) {
             String habitatsStr = String.join(", ", habitatsValidos);
             throw new IllegalArgumentException(
