@@ -1,21 +1,21 @@
-# patrones-arquitectonicos-y-de-diseno
+# Patrones Arquitectónicos y de Diseño
 
-Aplicación cliente-servidor con **Spring Boot + HTML/CSS/JS (Fetch API)** que implementa los siguientes patrones de diseño y arquitectura:
+API REST desarrollada con **Spring Boot** que implementa patrones de diseño y arquitectura a través de un sistema de gestión de animales para un zoológico. El proyecto se ejecuta completamente en **Docker**.
 
 | Patrón | Rol en el sistema |
 |---|---|
-| **Cliente–Servidor** | Frontend estático separado del backend Spring Boot |
-| **DTO** | `AnimalDTO` transporta datos entre cliente y servidor sin lógica |
-| **Factory Method** | `AnimalFactoryImpl` crea la subclase concreta de `Animal` según el tipo |
+| **Cliente–Servidor** | El cliente consume la API REST expuesta por el backend Spring Boot |
+| **DTO** | `AnimalDTO` transporta datos entre cliente y servidor sin exponer lógica de dominio |
+| **Factory Method** | `AnimalFactoryImpl` crea la subclase concreta de `Animal` según el tipo recibido |
 | **Bridge** | `Animal` y `Habitat` son jerarquías independientes unidas por composición |
-| **Chain of Responsibility** | 5 validadores encadenados procesan el DTO antes de registrar |
+| **Chain of Responsibility** | 5 validadores encadenados procesan el DTO antes de registrar el animal |
 
 ---
 
 ## Arquitectura
 
 ```
-Frontend (HTML + JS)
+Cliente (HTTP)
   └─ POST /api/animales (AnimalDTO en JSON)
        └─ AnimalController
             └─ AnimalService
@@ -25,25 +25,28 @@ Frontend (HTML + JS)
                  └─ Repositorio en memoria (List<Animal>)
 ```
 
----
 
 ## Requisitos
 
-- Java 17+
-- Maven 3.9+
+- [Docker](https://www.docker.com/) instalado
 
 ---
 
-## Ejecutar
+## Ejecutar con Docker
 
-**Backend:**
 ```bash
-mvn spring-boot:run
-```
-Servidor disponible en `http://localhost:8080`
+# 1. Clonar el repositorio
+git clone https://github.com/div468/patrones-arquitectonicos-y-de-diseno.git
+cd patrones-arquitectonicos-y-de-diseno
 
-**Frontend:**
-Abre `frontend/index.html` directamente en el navegador (o con Live Server en VS Code).
+# 2. Construir la imagen
+docker build -t zoologico .
+
+# 3. Ejecutar el contenedor
+docker run -p 8080:8080 zoologico
+```
+
+API disponible en `http://localhost:8080`
 
 ---
 
@@ -90,7 +93,7 @@ Animal (abstract)          Habitat (interface)
 
 ### Chain of Responsibility
 
-Cinco validadores encadenados. Cada uno conoce solo al siguiente. Si un eslabón falla, corta la cadena y lanza `IllegalArgumentException`. El último eslabón contiene la regla de negocio real.
+Cinco validadores encadenados. Cada uno conoce solo al siguiente. Si un eslabón falla, corta la cadena y lanza `IllegalArgumentException`.
 
 ```
 ValidarNombre          → nombre no vacío, solo letras, máx 30 caracteres
@@ -117,60 +120,28 @@ ValidarNombre          → nombre no vacío, solo letras, máx 30 caracteres
 
 ### UML de Clases
 
-![alt text](images/umlClases.png)
+![UML de Clases](images/umlClases.png)
 
 ### UML de Secuencia
 
-![alt text](images/umlSecuencia.png)
+![UML de Secuencia](images/umlSecuencia.png)
 
 ---
 
 ## Estructura del proyecto
 
 ```
-├── frontend/
-│   ├── index.html       # UI con badges explicativos por patrón
-│   ├── style.css
-│   └── app.js           # Fetch API + animación de la cadena + tooltips
-│
-└── src/main/java/com/zoo/
-    ├── controller/      # AnimalController — API REST (@RestController)
-    ├── service/         # AnimalService — orquesta chain, factory y repositorio
-    ├── dto/             # AnimalDTO — objeto de transferencia
-    ├── model/           # Animal (abstract) + Leon, Elefante, Mono, Tiburon, Aguila, Cocodrilo
-    ├── bridge/          # Habitat (interface) + Sabana, Selva, Acuario, Rio, Desierto, Montana
-    ├── factory/         # AnimalFactory (abstract) + AnimalFactoryImpl
-    └── chain/           # Validador (abstract) + 5 implementaciones
+├── images/
+│   ├── umlClases.png
+│   └── umlSecuencia.png
+├── src/main/java/com/zoo/
+│   ├── controller/      # AnimalController — API REST (@RestController)
+│   ├── service/         # AnimalService — orquesta chain, factory y repositorio
+│   ├── dto/             # AnimalDTO — objeto de transferencia
+│   ├── model/           # Animal (abstract) + Leon, Elefante, Mono, Tiburon, Aguila, Cocodrilo
+│   ├── bridge/          # Habitat (interface) + Sabana, Selva, Acuario, Rio, Desierto, Montana
+│   ├── factory/         # AnimalFactory (abstract) + AnimalFactoryImpl
+│   └── chain/           # Validador (abstract) + 5 implementaciones
+├── Dockerfile
+└── pom.xml
 ```
-
----
-
-## Endpoints
-
-Base URL: `http://localhost:8080/api/animales`
-
-### POST `/api/animales` — Registrar animal
-
-```json
-{
-  "tipo": "TIBURON",
-  "nombre": "Bruce",
-  "edad": 8,
-  "habitat": "ACUARIO"
-}
-```
-
-Respuesta `200 OK`: `Animal registrado correctamente`  
-Respuesta `400 Bad Request`: mensaje del eslabón que falló, ej. `TIBURON no puede vivir en SABANA. Hábitats válidos: ACUARIO, RIO`
-
-### GET `/api/animales` — Listar todos
-
-```json
-[
-  { "nombre": "Bruce", "edad": 8, "tipo": "TIBURON", "habitat": "Habita en el acuario" }
-]
-```
-
-### GET `/api/animales/ordenar?criterio=edad` — Ordenar
-
-El parámetro `criterio` acepta `edad` o `nombre`.
